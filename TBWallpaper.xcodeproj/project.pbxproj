@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		943C0D1725C579BD00F42E94 /* NSImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 943C0D1625C579BD00F42E94 /* NSImage+Blur.m */; };
+		943C0D1F25C6D5EA00F42E94 /* TBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 943C0D1D25C6D5EA00F42E94 /* TBHelper.m */; };
+		943C0D2A25C6D9FC00F42E94 /* WPSetPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 943C0D2825C6D9FC00F42E94 /* WPSetPathView.m */; };
+		943C0D2B25C6D9FC00F42E94 /* WPSetPathView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943C0D2925C6D9FC00F42E94 /* WPSetPathView.xib */; };
+		943C0D3125C8830900F42E94 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943C0D3025C8830900F42E94 /* Carbon.framework */; };
+		9460113C25C1F38B0089C237 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460113B25C1F38B0089C237 /* CoreImage.framework */; };
+		9468AA7625BAE4EC00063BE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468AA7525BAE4EC00063BE0 /* AppDelegate.m */; };
+		9468AA7B25BAE4ED00063BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9468AA7A25BAE4ED00063BE0 /* Assets.xcassets */; };
+		9468AA7E25BAE4EE00063BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9468AA7C25BAE4EE00063BE0 /* Main.storyboard */; };
+		9468AA8125BAE4EE00063BE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468AA8025BAE4EE00063BE0 /* main.m */; };
+		9468AA8D25BAE6E700063BE0 /* WPSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468AA8B25BAE6E700063BE0 /* WPSettingView.m */; };
+		9468AA8E25BAE6E700063BE0 /* WPSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9468AA8C25BAE6E700063BE0 /* WPSettingView.xib */; };
+		9468AA9625BB2EFB00063BE0 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9468AA9525BB2EFB00063BE0 /* default.jpg */; };
+		9468AAB025BB38FD00063BE0 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9468AAAF25BB38FD00063BE0 /* NetworkExtension.framework */; };
+		9468AAB425BB42A700063BE0 /* wifiInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468AAB325BB42A700063BE0 /* wifiInfo.m */; };
+		9468AAD225C0BA3A00063BE0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9468AAD125C0BA3A00063BE0 /* Reachability.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		943C0D1525C579BD00F42E94 /* NSImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Blur.h"; sourceTree = "<group>"; };
+		943C0D1625C579BD00F42E94 /* NSImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Blur.m"; sourceTree = "<group>"; };
+		943C0D1D25C6D5EA00F42E94 /* TBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHelper.m; sourceTree = "<group>"; };
+		943C0D1E25C6D5EA00F42E94 /* TBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHelper.h; sourceTree = "<group>"; };
+		943C0D2725C6D9FC00F42E94 /* WPSetPathView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WPSetPathView.h; sourceTree = "<group>"; };
+		943C0D2825C6D9FC00F42E94 /* WPSetPathView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WPSetPathView.m; sourceTree = "<group>"; };
+		943C0D2925C6D9FC00F42E94 /* WPSetPathView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WPSetPathView.xib; sourceTree = "<group>"; };
+		943C0D3025C8830900F42E94 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		9460113B25C1F38B0089C237 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		9468AA7125BAE4EC00063BE0 /* TBWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TBWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9468AA7425BAE4EC00063BE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9468AA7525BAE4EC00063BE0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9468AA7A25BAE4ED00063BE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9468AA7D25BAE4EE00063BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9468AA7F25BAE4EE00063BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9468AA8025BAE4EE00063BE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9468AA8225BAE4EE00063BE0 /* TBWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TBWallpaper.entitlements; sourceTree = "<group>"; };
+		9468AA8A25BAE6E700063BE0 /* WPSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WPSettingView.h; sourceTree = "<group>"; };
+		9468AA8B25BAE6E700063BE0 /* WPSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WPSettingView.m; sourceTree = "<group>"; };
+		9468AA8C25BAE6E700063BE0 /* WPSettingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WPSettingView.xib; sourceTree = "<group>"; };
+		9468AA9525BB2EFB00063BE0 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = SOURCE_ROOT; };
+		9468AAAC25BB38E500063BE0 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
+		9468AAAF25BB38FD00063BE0 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		9468AAB225BB42A700063BE0 /* wifiInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wifiInfo.h; sourceTree = "<group>"; };
+		9468AAB325BB42A700063BE0 /* wifiInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wifiInfo.m; sourceTree = "<group>"; };
+		9468AAD025C0BA3A00063BE0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		9468AAD125C0BA3A00063BE0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9468AA6E25BAE4EC00063BE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				943C0D3125C8830900F42E94 /* Carbon.framework in Frameworks */,
+				9460113C25C1F38B0089C237 /* CoreImage.framework in Frameworks */,
+				9468AAB025BB38FD00063BE0 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		943C0D0D25C5745500F42E94 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				943C0D1E25C6D5EA00F42E94 /* TBHelper.h */,
+				943C0D1D25C6D5EA00F42E94 /* TBHelper.m */,
+				943C0D1525C579BD00F42E94 /* NSImage+Blur.h */,
+				943C0D1625C579BD00F42E94 /* NSImage+Blur.m */,
+				9468AAB225BB42A700063BE0 /* wifiInfo.h */,
+				9468AAB325BB42A700063BE0 /* wifiInfo.m */,
+				9468AAD025C0BA3A00063BE0 /* Reachability.h */,
+				9468AAD125C0BA3A00063BE0 /* Reachability.m */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		9468AA6825BAE4EC00063BE0 = {
+			isa = PBXGroup;
+			children = (
+				9468AA7325BAE4EC00063BE0 /* TBWallpaper */,
+				9468AA7225BAE4EC00063BE0 /* Products */,
+				9468AAAB25BB38E500063BE0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9468AA7225BAE4EC00063BE0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9468AA7125BAE4EC00063BE0 /* TBWallpaper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9468AA7325BAE4EC00063BE0 /* TBWallpaper */ = {
+			isa = PBXGroup;
+			children = (
+				943C0D0D25C5745500F42E94 /* Vendor */,
+				9468AA9525BB2EFB00063BE0 /* default.jpg */,
+				9468AA7425BAE4EC00063BE0 /* AppDelegate.h */,
+				9468AA7525BAE4EC00063BE0 /* AppDelegate.m */,
+				9468AA7A25BAE4ED00063BE0 /* Assets.xcassets */,
+				9468AA7C25BAE4EE00063BE0 /* Main.storyboard */,
+				9468AA7F25BAE4EE00063BE0 /* Info.plist */,
+				9468AA8025BAE4EE00063BE0 /* main.m */,
+				9468AA8225BAE4EE00063BE0 /* TBWallpaper.entitlements */,
+				9468AA8A25BAE6E700063BE0 /* WPSettingView.h */,
+				9468AA8B25BAE6E700063BE0 /* WPSettingView.m */,
+				9468AA8C25BAE6E700063BE0 /* WPSettingView.xib */,
+				943C0D2725C6D9FC00F42E94 /* WPSetPathView.h */,
+				943C0D2825C6D9FC00F42E94 /* WPSetPathView.m */,
+				943C0D2925C6D9FC00F42E94 /* WPSetPathView.xib */,
+			);
+			path = TBWallpaper;
+			sourceTree = "<group>";
+		};
+		9468AAAB25BB38E500063BE0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				943C0D3025C8830900F42E94 /* Carbon.framework */,
+				9460113B25C1F38B0089C237 /* CoreImage.framework */,
+				9468AAAF25BB38FD00063BE0 /* NetworkExtension.framework */,
+				9468AAAC25BB38E500063BE0 /* Network.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9468AA7025BAE4EC00063BE0 /* TBWallpaper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9468AA8525BAE4EE00063BE0 /* Build configuration list for PBXNativeTarget "TBWallpaper" */;
+			buildPhases = (
+				9468AA6D25BAE4EC00063BE0 /* Sources */,
+				9468AA6E25BAE4EC00063BE0 /* Frameworks */,
+				9468AA6F25BAE4EC00063BE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TBWallpaper;
+			productName = TBWallpaper;
+			productReference = 9468AA7125BAE4EC00063BE0 /* TBWallpaper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9468AA6925BAE4EC00063BE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					9468AA7025BAE4EC00063BE0 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+				};
+			};
+			buildConfigurationList = 9468AA6C25BAE4EC00063BE0 /* Build configuration list for PBXProject "TBWallpaper" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9468AA6825BAE4EC00063BE0;
+			productRefGroup = 9468AA7225BAE4EC00063BE0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9468AA7025BAE4EC00063BE0 /* TBWallpaper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9468AA6F25BAE4EC00063BE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9468AA8E25BAE6E700063BE0 /* WPSettingView.xib in Resources */,
+				943C0D2B25C6D9FC00F42E94 /* WPSetPathView.xib in Resources */,
+				9468AA7B25BAE4ED00063BE0 /* Assets.xcassets in Resources */,
+				9468AA7E25BAE4EE00063BE0 /* Main.storyboard in Resources */,
+				9468AA9625BB2EFB00063BE0 /* default.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9468AA6D25BAE4EC00063BE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9468AAB425BB42A700063BE0 /* wifiInfo.m in Sources */,
+				9468AA8125BAE4EE00063BE0 /* main.m in Sources */,
+				9468AA8D25BAE6E700063BE0 /* WPSettingView.m in Sources */,
+				9468AA7625BAE4EC00063BE0 /* AppDelegate.m in Sources */,
+				9468AAD225C0BA3A00063BE0 /* Reachability.m in Sources */,
+				943C0D2A25C6D9FC00F42E94 /* WPSetPathView.m in Sources */,
+				943C0D1F25C6D5EA00F42E94 /* TBHelper.m in Sources */,
+				943C0D1725C579BD00F42E94 /* NSImage+Blur.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9468AA7C25BAE4EE00063BE0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9468AA7D25BAE4EE00063BE0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9468AA8325BAE4EE00063BE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9468AA8425BAE4EE00063BE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9468AA8625BAE4EE00063BE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TBWallpaper/TBWallpaper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
+				INFOPLIST_FILE = TBWallpaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = wp.tb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9468AA8725BAE4EE00063BE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TBWallpaper/TBWallpaper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
+				INFOPLIST_FILE = TBWallpaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = wp.tb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9468AA6C25BAE4EC00063BE0 /* Build configuration list for PBXProject "TBWallpaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9468AA8325BAE4EE00063BE0 /* Debug */,
+				9468AA8425BAE4EE00063BE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9468AA8525BAE4EE00063BE0 /* Build configuration list for PBXNativeTarget "TBWallpaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9468AA8625BAE4EE00063BE0 /* Debug */,
+				9468AA8725BAE4EE00063BE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9468AA6925BAE4EC00063BE0 /* Project object */;
+}
