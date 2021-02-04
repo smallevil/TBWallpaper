@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong) IBOutlet NSTableView *tableView;
 @property (strong) IBOutlet NSTextField *currentEnv;
 - (IBAction)resetChangeTime:(id)sender;
+@property (strong) IBOutlet NSTextField *lastWPPath;
+- (void)showChangeHistoryView:(id)sender;
 
 @end
 

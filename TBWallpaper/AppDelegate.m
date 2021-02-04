@@ -15,6 +15,7 @@
 #include <AudioToolbox/AudioServices.h>
 
 #include "Reachability.h"
+#import "NSScreen+DisplayInfo.h"
 
 
 @interface AppDelegate ()
@@ -96,6 +97,7 @@
     
     statusItem.button.image = [NSImage imageNamed:@"bar"];
     statusItem.button.imagePosition = NSImageLeft;
+    //statusItem.button.title = @"xxxx";
     statusItem.button.toolTip = @"壁纸";
     
     [statusItem.button setTarget:self];
@@ -167,7 +169,7 @@
     //关机(休眠)时直接设成默认壁纸
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Change_Wallpaper" object:@{@"status":@"default"} userInfo:nil];   //切换网络时
     
-    //关机(休眠)时直接设成最小声音
+    //关机(休眠)时直接设成最小声音(此处好像无效)
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Change_volume" object:@{@"type":@"small"} userInfo:nil];
     NSLog(@"receiveSleepNote: %@", [note name]);
 }
@@ -177,6 +179,9 @@
     //此函数会被多次触发
     
     NSLog(@"receiveWakeNote: %@", [note name]);
+    
+    //关机(休眠)时直接设成最小声音
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Change_volume" object:@{@"type":@"small"} userInfo:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Change_Wallpaper" object:nil userInfo:nil];   //切换网络时
 }
@@ -247,20 +252,20 @@
         dispatch_async(mySerialDispatchQueue, ^{
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self searchFiles:[info objectForKey:@"path"] key:[info objectForKey:@"type"]];
+                [self searchFiles:info];
             });
         });
     }
 }
 
--(void)searchFiles:(NSString *)home key:(NSString *)key
+-(void)searchFiles:(NSDictionary *)info
 {
     NSMutableArray *files = [NSMutableArray array];
     
     //文件管理器
     NSFileManager *manager = [NSFileManager defaultManager];
     //文件夹路径
-    //NSString *home = rootPath;
+    NSString *home = [info objectForKey:@"path"];
     //NSString *home = [manager currentDirectoryPath];
     //枚举器
     NSDirectoryEnumerator *direnum = [manager enumeratorAtPath:home];
@@ -283,37 +288,40 @@
         }
     }
     
-    NSLog(@"添加壁纸:%@:%ld", key, [files count]);
+    [info setValue:[files copy] forKey:@"files"];
+    NSLog(@"添加壁纸:%@:%ld", [info objectForKey:@"type"], [files count]);
     
-    [_imageFiles setObject:[files copy] forKey:key];
+    [_imageFiles setObject:info forKey:[info objectForKey:@"type"]];
     
     //int pos = arc4random() % [files count];
     //NSLog(@"随机图片:%@", [files objectAtIndex:pos]);
 }
 
--(NSString *)getWallpaperByRandom
+-(NSString *)getWallpaperByRandom:(NSScreen *)thescreen
 {
     if(!_imageFiles)
     {
         return nil;
     }
     
+    NSString *file = @"";
     NSString *importantStatus = [TBHelper getValueFromUserDefaults:@"important_status"];    //查看当前是否重要场合设置
     if([importantStatus isEqualToString:@"1"])
     {
         //是重要场合
         if([_imageFiles objectForKey:@"important"])
         {
-            NSArray *files = [_imageFiles objectForKey:@"important"];
+            NSArray *files = [[_imageFiles objectForKey:@"important"] objectForKey:@"files"];
             if([files count] <= 0)
             {
                 return nil;
             }
             
+            [TBHelper setValueFromUserDefaults:@"last_wp_env_title" value:[[_imageFiles objectForKey:@"important"] objectForKey:@"title"]];
+            
             int pos = arc4random() % [files count];
-            NSString *file = [files objectAtIndex:pos];
+            file = [files objectAtIndex:pos];
             NSLog(@"得到随机图片:%@", file);
-            return file;
         }
     }
     else
@@ -321,36 +329,80 @@
         NSDictionary *wifi = [wifiInfo getWifiBSSID];
         if([_imageFiles objectForKey:[wifi objectForKey:@"bssid"]])
         {
-            NSArray *files = [_imageFiles objectForKey:[wifi objectForKey:@"bssid"]];
+            NSArray *files = [[_imageFiles objectForKey:[wifi objectForKey:@"bssid"]] objectForKey:@"files"];
             if([files count] <= 0)
             {
                 return nil;
             }
             
+            [TBHelper setValueFromUserDefaults:@"last_wp_env_title" value:[[_imageFiles objectForKey:[wifi objectForKey:@"bssid"]] objectForKey:@"title"]];
+            
             int pos = arc4random() % [files count];
-            NSString *file = [files objectAtIndex:pos];
+            file = [files objectAtIndex:pos];
             NSLog(@"得到随机图片:%@", file);
-            return file;
         }
         else
         {
             if([_imageFiles objectForKey:@"public"])
             {
-                NSArray *files = [_imageFiles objectForKey:@"public"];
+                NSArray *files = [[_imageFiles objectForKey:@"public"] objectForKey:@"files"];
                 if([files count] <= 0)
                 {
                     return nil;
                 }
                 
+                [TBHelper setValueFromUserDefaults:@"last_wp_env_title" value:[[_imageFiles objectForKey:@"public"] objectForKey:@"title"]];
+                
                 int pos = arc4random() % [files count];
-                NSString *file = [files objectAtIndex:pos];
+                file = [files objectAtIndex:pos];
                 NSLog(@"得到随机图片:%@", file);
-                return file;
             }
         }
     }
     
-    return nil;
+    [TBHelper setValueFromUserDefaults:@"last_wp_path" value:file];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Update_Last_path" object:nil userInfo:nil];
+    
+    NSDate *date = [NSDate date];
+    NSTimeInterval sec = [date timeIntervalSinceNow];
+    NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:sec];
+    NSDateFormatter * df = [[NSDateFormatter alloc] init ];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *changeTime = [df stringFromDate:currentDate];
+    
+    NSString *wpLastPath = file;
+    NSString *screenName = thescreen.localizedName;
+    NSString *envTitle = [TBHelper getValueFromUserDefaults:@"last_wp_env_title"];
+    
+    NSDictionary *lastInfo = [NSDictionary dictionaryWithObjectsAndKeys:screenName, @"screen", changeTime, @"time", envTitle, @"title", wpLastPath, @"path", nil];
+    
+    NSString *historyFile = [NSString stringWithFormat:@"%@/history.plist", NSTemporaryDirectory()];
+    NSMutableArray *history = [NSMutableArray arrayWithContentsOfFile:historyFile];
+    if(!history)
+    {
+        history = [[NSMutableArray alloc] init];
+        [history addObject:lastInfo];
+    }
+    else
+    {
+        [history insertObject:lastInfo atIndex:0];
+    }
+    NSLog(@"记录文件:%@", historyFile);
+    NSLog(@"历史记录:%@", history);
+    
+    NSMutableArray *newHistory = [[NSMutableArray alloc] init];
+    if([history count] > 100)
+    {
+        newHistory = [[history subarrayWithRange:NSMakeRange(0, 99)] mutableCopy];
+    }
+    else
+    {
+        newHistory = history;
+    }
+    [newHistory writeToFile:historyFile atomically:YES];
+    
+    return file;
 }
 
 -(void)setWallpaperTimer
@@ -367,8 +419,11 @@
     id theScreens = [NSScreen screens];
     for (thescreen in theScreens)
     {
+        //NSLog(@"屏幕对像:%@--%@--%@", thescreen.localizedName, [thescreen displayID], [thescreen displayName]);
         if(info)
         {
+            [TBHelper setValueFromUserDefaults:@"last_wp_path" value:@"默认壁纸"];
+            
             //默认壁纸
             NSURL *wpURL = [[NSBundle mainBundle] URLForResource:@"default" withExtension:@"jpg"];
             NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:nil, NSWorkspaceDesktopImageFillColorKey, [NSNumber numberWithBool:NO], NSWorkspaceDesktopImageAllowClippingKey, [NSNumber numberWithInteger:NSImageScaleProportionallyUpOrDown], NSWorkspaceDesktopImageScalingKey, nil];
@@ -376,11 +431,26 @@
         }
         else
         {
+            NSString *tmpPath = NSTemporaryDirectory();
+            NSURL *lastImageURL = [[NSWorkspace sharedWorkspace] desktopImageURLForScreen:thescreen];
+            NSString *lastImagePath = [lastImageURL path];
+            NSLog(@"xxxx目录:%@", tmpPath);
+            NSLog(@"xxxx文件:%@", lastImagePath);
+            
+            NSRange range = [lastImagePath rangeOfString:tmpPath];
+            if(range.location != NSNotFound)
+            {
+                //非默认图
+                NSLog(@"非默认图,可以删除");
+                NSError *error = nil;
+                [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:lastImagePath] error:&error];
+            }
+            
             dispatch_queue_t mySerialDispatchQueue = dispatch_queue_create("wp.tb.changewp", DISPATCH_QUEUE_SERIAL);
             dispatch_async(mySerialDispatchQueue, ^{
 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSString *wpFile = [self fixWallPapge:[self getWallpaperByRandom]];
+                    NSString *wpFile = [self fixWallPapge:[self getWallpaperByRandom:thescreen]];
                     //NSString *wpFile = @"/Users/wu/Desktop/8277070715932695688e8.jpg";
                     NSLog(@"更换壁纸:%@", wpFile);
                     if(wpFile)
@@ -394,6 +464,7 @@
                 });
             });
         }
+        
     }
 }
 
@@ -525,7 +596,7 @@
 
 -(NSString *)writeFile:(NSImage *)image
 {
-    NSString *wpFile = [NSString stringWithFormat:@"/tmp/%@.jpg", [TBHelper UDID]];
+    NSString *wpFile = [NSString stringWithFormat:@"%@/tbwp.%@.jpg", NSTemporaryDirectory(), [TBHelper UDID]];
     CGImageRef cgRef = [image CGImageForProposedRect:NULL
                                                 context:nil
                                                   hints:nil];

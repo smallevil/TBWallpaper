@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		942CB67625CBEB3C0061E39F /* WPChangeHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CB67425CBEB3C0061E39F /* WPChangeHistoryView.m */; };
+		942CB67725CBEB3C0061E39F /* WPChangeHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 942CB67525CBEB3C0061E39F /* WPChangeHistoryView.xib */; };
+		942CB67B25CBF18D0061E39F /* NSScreen+DisplayInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 942CB67A25CBF18D0061E39F /* NSScreen+DisplayInfo.m */; };
 		943C0D1725C579BD00F42E94 /* NSImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 943C0D1625C579BD00F42E94 /* NSImage+Blur.m */; };
 		943C0D1F25C6D5EA00F42E94 /* TBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 943C0D1D25C6D5EA00F42E94 /* TBHelper.m */; };
 		943C0D2A25C6D9FC00F42E94 /* WPSetPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 943C0D2825C6D9FC00F42E94 /* WPSetPathView.m */; };
@@ -26,6 +29,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		942CB67325CBEB3C0061E39F /* WPChangeHistoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WPChangeHistoryView.h; sourceTree = "<group>"; };
+		942CB67425CBEB3C0061E39F /* WPChangeHistoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WPChangeHistoryView.m; sourceTree = "<group>"; };
+		942CB67525CBEB3C0061E39F /* WPChangeHistoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WPChangeHistoryView.xib; sourceTree = "<group>"; };
+		942CB67925CBF18D0061E39F /* NSScreen+DisplayInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScreen+DisplayInfo.h"; sourceTree = "<group>"; };
+		942CB67A25CBF18D0061E39F /* NSScreen+DisplayInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScreen+DisplayInfo.m"; sourceTree = "<group>"; };
 		943C0D1525C579BD00F42E94 /* NSImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Blur.h"; sourceTree = "<group>"; };
 		943C0D1625C579BD00F42E94 /* NSImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Blur.m"; sourceTree = "<group>"; };
 		943C0D1D25C6D5EA00F42E94 /* TBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHelper.m; sourceTree = "<group>"; };
@@ -72,6 +80,8 @@
 		943C0D0D25C5745500F42E94 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				942CB67925CBF18D0061E39F /* NSScreen+DisplayInfo.h */,
+				942CB67A25CBF18D0061E39F /* NSScreen+DisplayInfo.m */,
 				943C0D1E25C6D5EA00F42E94 /* TBHelper.h */,
 				943C0D1D25C6D5EA00F42E94 /* TBHelper.m */,
 				943C0D1525C579BD00F42E94 /* NSImage+Blur.h */,
@@ -119,6 +129,9 @@
 				943C0D2725C6D9FC00F42E94 /* WPSetPathView.h */,
 				943C0D2825C6D9FC00F42E94 /* WPSetPathView.m */,
 				943C0D2925C6D9FC00F42E94 /* WPSetPathView.xib */,
+				942CB67325CBEB3C0061E39F /* WPChangeHistoryView.h */,
+				942CB67425CBEB3C0061E39F /* WPChangeHistoryView.m */,
+				942CB67525CBEB3C0061E39F /* WPChangeHistoryView.xib */,
 			);
 			path = TBWallpaper;
 			sourceTree = "<group>";
@@ -192,6 +205,7 @@
 			files = (
 				9468AA8E25BAE6E700063BE0 /* WPSettingView.xib in Resources */,
 				943C0D2B25C6D9FC00F42E94 /* WPSetPathView.xib in Resources */,
+				942CB67725CBEB3C0061E39F /* WPChangeHistoryView.xib in Resources */,
 				9468AA7B25BAE4ED00063BE0 /* Assets.xcassets in Resources */,
 				9468AA7E25BAE4EE00063BE0 /* Main.storyboard in Resources */,
 				9468AA9625BB2EFB00063BE0 /* default.jpg in Resources */,
@@ -206,11 +220,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9468AAB425BB42A700063BE0 /* wifiInfo.m in Sources */,
+				942CB67625CBEB3C0061E39F /* WPChangeHistoryView.m in Sources */,
 				9468AA8125BAE4EE00063BE0 /* main.m in Sources */,
 				9468AA8D25BAE6E700063BE0 /* WPSettingView.m in Sources */,
 				9468AA7625BAE4EC00063BE0 /* AppDelegate.m in Sources */,
 				9468AAD225C0BA3A00063BE0 /* Reachability.m in Sources */,
 				943C0D2A25C6D9FC00F42E94 /* WPSetPathView.m in Sources */,
+				942CB67B25CBF18D0061E39F /* NSScreen+DisplayInfo.m in Sources */,
 				943C0D1F25C6D5EA00F42E94 /* TBHelper.m in Sources */,
 				943C0D1725C579BD00F42E94 /* NSImage+Blur.m in Sources */,
 			);
@@ -349,13 +365,13 @@
 				CODE_SIGN_ENTITLEMENTS = TBWallpaper/TBWallpaper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 8;
 				INFOPLIST_FILE = TBWallpaper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = wp.tb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -369,13 +385,13 @@
 				CODE_SIGN_ENTITLEMENTS = TBWallpaper/TBWallpaper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 8;
 				INFOPLIST_FILE = TBWallpaper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = wp.tb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

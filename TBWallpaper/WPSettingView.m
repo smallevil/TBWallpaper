@@ -10,6 +10,7 @@
 #import "WPSetPathView.h"
 #import "TBHelper.h"
 #import "wifiInfo.h"
+#import "WPChangeHistoryView.h"
 
 @interface WPSettingView ()<NSTableViewDelegate,NSTableViewDataSource, NSTextFieldDelegate>
 
@@ -50,6 +51,11 @@
     NSNumberFormatter *numberFormater = [[NSNumberFormatter alloc] init];
     [numberFormater setNumberStyle:kCFNumberFormatterNoStyle];
     [_changeTime setFormatter:numberFormater];
+    
+    NSClickGestureRecognizer *click = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(showChangeHistoryView:)];
+    [_lastWPPath addGestureRecognizer:click];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLastWallpaperPath) name:@"Notification_Update_Last_path" object:nil];
 }
 
 -(void)viewWillAppear {
@@ -85,7 +91,14 @@
         }
     }
     
+    [self updateLastWallpaperPath];
+    
     [_tableView reloadData];
+}
+
+-(void)updateLastWallpaperPath
+{
+    [_lastWPPath setStringValue:[TBHelper getValueFromUserDefaults:@"last_wp_path"]];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {
@@ -183,5 +196,9 @@
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Change_Time" object:nil userInfo:nil];
     }
+}
+- (void)showChangeHistoryView:(id)sender {
+    WPChangeHistoryView *view = [[WPChangeHistoryView alloc] init];
+    [self presentViewControllerAsModalWindow:view];
 }
 @end
