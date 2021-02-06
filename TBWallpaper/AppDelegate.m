@@ -27,6 +27,8 @@
 
 @property (nonatomic, assign) NSTimer *changeTimer;
 
+@property (nonatomic, strong) NSTask *caffeinateTask;
+
 @end
 
 @implementation AppDelegate
@@ -69,15 +71,21 @@
             {
                 if([[TBHelper getValueFromUserDefaults:@"important_status"] integerValue])
                 {
+                    [self enableSleep];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_DND_OFF" object:nil userInfo:nil];
                     [TBHelper setValueFromUserDefaults:@"important_status" value:@"0"];
                 }
                 else
                 {
+                    [self disableSleep];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_DND_ON" object:nil userInfo:nil];
                     [TBHelper setValueFromUserDefaults:@"important_status" value:@"1"];
                 }
             }
             else
             {
+                [self disableSleep];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_DND_ON" object:nil userInfo:nil];
                 [TBHelper setValueFromUserDefaults:@"important_status" value:@"1"];
             }
             
@@ -212,6 +220,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setWallpaper:) name:@"Notification_Change_Wallpaper" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setVolume:) name:@"Notification_Change_volume" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetWPChangeTime:) name:@"Notification_Change_Time" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(turnDoNotDisturbOn) name:@"Notification_DND_ON" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(turnDoNotDisturbOff) name:@"Notification_DND_OFF" object:nil];
     
     //监听休眠
     [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: self selector: @selector(receiveSleepNote:) name: NSWorkspaceWillSleepNotification object: NULL];
@@ -360,6 +371,19 @@
         }
     }
     
+    if(file.length <= 0)
+    {
+        return nil;
+    }
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:file])
+    {
+        //随机得到的文件并不存在,应该是手动删除了.需要重新扫描所有目录
+        NSLog(@"文件丢失,重新扫描");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Update_Images" object:nil userInfo:nil];
+        return nil;
+    }
+    
     [TBHelper setValueFromUserDefaults:@"last_wp_path" value:file];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Update_Last_path" object:nil userInfo:nil];
@@ -374,7 +398,7 @@
     NSString *wpLastPath = file;
     NSString *screenName = thescreen.localizedName;
     NSString *envTitle = [TBHelper getValueFromUserDefaults:@"last_wp_env_title"];
-    
+    //self.statusItem.button.toolTip = envTitle;
     NSDictionary *lastInfo = [NSDictionary dictionaryWithObjectsAndKeys:screenName, @"screen", changeTime, @"time", envTitle, @"title", wpLastPath, @"path", nil];
     
     NSString *historyFile = [NSString stringWithFormat:@"%@/history.plist", NSTemporaryDirectory()];
@@ -389,7 +413,7 @@
         [history insertObject:lastInfo atIndex:0];
     }
     NSLog(@"记录文件:%@", historyFile);
-    NSLog(@"历史记录:%@", history);
+    //NSLog(@"历史记录:%@", history);
     
     NSMutableArray *newHistory = [[NSMutableArray alloc] init];
     if([history count] > 100)
@@ -441,9 +465,12 @@
             if(range.location != NSNotFound)
             {
                 //非默认图
-                NSLog(@"非默认图,可以删除");
-                NSError *error = nil;
-                [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:lastImagePath] error:&error];
+                if([[NSFileManager defaultManager] fileExistsAtPath:lastImagePath])
+                {
+                    NSLog(@"非默认图,可以删除:%@", lastImagePath);
+                    NSError *error = nil;
+                    [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:lastImagePath] error:&error];
+                }
             }
             
             dispatch_queue_t mySerialDispatchQueue = dispatch_queue_create("wp.tb.changewp", DISPATCH_QUEUE_SERIAL);
@@ -571,6 +598,11 @@
         return nil;
     }
     
+    if(imageFile.length <= 0)
+    {
+        return nil;
+    }
+    
     
     //NSString *imageFile = @"/Users/wu/Desktop/8277070715932695688e8.jpg";
     NSImage *bgImage = [[NSImage alloc] initWithContentsOfFile:imageFile];
@@ -607,4 +639,91 @@
     //sleep(2);
     return wpFile;
 }
+
+//////////////////////////////////////////////    勿扰模式   ////////////////////////////////////////
+-(void)turnDoNotDisturbOn
+{
+    // The trick is to set DND time range from 00:00 (0 minutes) to 23:59 (1439 minutes),
+    // so it will always be on
+    CFPreferencesSetValue(CFSTR("dndStart"), (__bridge CFPropertyListRef)(@(0.0f)),
+                          CFSTR("com.apple.notificationcenterui"),
+                          kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+
+    CFPreferencesSetValue(CFSTR("dndEnd"), (__bridge CFPropertyListRef)(@(1440.f)),
+                          CFSTR("com.apple.notificationcenterui"),
+                          kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+
+    CFPreferencesSetValue(CFSTR("doNotDisturb"), (__bridge CFPropertyListRef)(@(YES)),
+                          CFSTR("com.apple.notificationcenterui"),
+                          kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+
+    // Notify all the related daemons that we have changed Do Not Disturb preferences
+    commitDoNotDisturbChanges();
+}
+
+
+-(void) turnDoNotDisturbOff
+{
+    CFPreferencesSetValue(CFSTR("dndStart"), NULL,
+                        CFSTR("com.apple.notificationcenterui"),
+                        kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+
+    CFPreferencesSetValue(CFSTR("dndEnd"), NULL,
+                          CFSTR("com.apple.notificationcenterui"),
+                          kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+
+    CFPreferencesSetValue(CFSTR("doNotDisturb"), (__bridge CFPropertyListRef)(@(NO)),
+                          CFSTR("com.apple.notificationcenterui"),
+                          kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+
+    commitDoNotDisturbChanges();
+}
+
+void commitDoNotDisturbChanges(void)
+{
+    /// XXX: I'm using kCFPreferencesCurrentUser placeholder here which means that this code must
+    /// be run under regular user's account (not root/admin). If you're going to run this code
+    /// from a privileged helper, use kCFPreferencesAnyUser in order to toggle DND for all users
+    /// or drop privileges and use kCFPreferencesCurrentUser.
+    CFPreferencesSynchronize(CFSTR("com.apple.notificationcenterui"), kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    [[NSDistributedNotificationCenter defaultCenter] postNotificationName: @"com.apple.notificationcenterui.dndprefs_changed"
+                                                               object: nil userInfo: nil
+                                                   deliverImmediately: YES];
+}
+
+//阻止电脑进入休眠
+-(void)disableSleep
+{
+    //命令
+    //caffeinate -d -i -s -u
+    
+    if(_caffeinateTask)
+    {
+        [self enableSleep];
+    }
+    
+    _caffeinateTask = [[NSTask alloc] init];
+    [_caffeinateTask setLaunchPath:@"/usr/bin/caffeinate"];
+    [_caffeinateTask setArguments:@[@"-d", @"-i", @"-s", @"-t 86400"]];    //一天,即使出意外,一天后也能自动恢复
+    [_caffeinateTask launch];
+}
+
+-(void)enableSleep
+{
+    if(_caffeinateTask)
+    {
+        [_caffeinateTask terminate];
+        _caffeinateTask = nil;
+    }
+    else
+    {
+        _caffeinateTask = nil;
+        
+        NSTask *task = [[NSTask alloc] init];
+        [task setLaunchPath:@"/usr/bin/killall"];
+        [task setArguments:@[@"caffeinate"]];    //杀死进程
+        [task launch];
+    }
+}
+
 @end

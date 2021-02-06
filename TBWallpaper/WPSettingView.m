@@ -37,8 +37,11 @@
     _tableMenu.autoenablesItems = false;
     NSMenuItem *delItem = [[NSMenuItem alloc] initWithTitle:@"添加" action:@selector(addRow:) keyEquivalent:@""];
     NSMenuItem *addItem = [[NSMenuItem alloc] initWithTitle:@"删除" action:@selector(delRow:) keyEquivalent:@""];
+    //NSMenuItem *updateItem = [[NSMenuItem alloc] initWithTitle:@"重载所有图片" action:@selector(updateImage:) keyEquivalent:@""];
+    //[_tableMenu addItem:updateItem];
     [_tableMenu addItem:delItem];
     [_tableMenu addItem:addItem];
+    
     _tableView.menu = _tableMenu;
     
     NSString *wpChangeTime = [TBHelper getValueFromUserDefaults:@"wp_change_time"];
@@ -181,15 +184,18 @@
     }
 }
 
+-(void)updateImage:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Update_Images" object:nil userInfo:nil];
+}
+
 - (IBAction)changeWP:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_Change_Wallpaper" object:nil userInfo:nil];
-    //[self testChangeWP];
 }
 
 - (IBAction)QuitAPP:(id)sender {
     [[NSApplication sharedApplication] terminate:self];
 }
-
 
 - (IBAction)resetChangeTime:(id)sender {
     if([_changeTime stringValue])
@@ -201,4 +207,5 @@
     WPChangeHistoryView *view = [[WPChangeHistoryView alloc] init];
     [self presentViewControllerAsModalWindow:view];
 }
+
 @end

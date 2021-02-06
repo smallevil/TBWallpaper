@@ -55,7 +55,7 @@
     
     NSString *historyFile = [NSString stringWithFormat:@"%@/history.plist", NSTemporaryDirectory()];
     _history = [NSMutableArray arrayWithContentsOfFile:historyFile];
-    NSLog(@"已存记录:%@", _history);
+    //NSLog(@"已存记录:%@", _history);
     [_tableView reloadData];
 }
 
@@ -101,7 +101,7 @@
         return nil;
     }
     
-    NSLog(@"行信息:%@", info);
+    //NSLog(@"行信息:%@", info);
     
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
     

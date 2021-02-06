@@ -34,6 +34,11 @@
     
     [_envTitle setStringValue:_wifi[@"ssid"]];
     [_wifiBSSID setStringValue:_wifi[@"bssid"]];
+    
+}
+
+-(void)viewDidAppear{
+    [self.view.window setStyleMask:NSWindowStyleMaskTitled | NSWindowStyleMaskClosable];
 }
 
 - (void)handlePopBtn:(NSPopUpButton *)popBtn {
